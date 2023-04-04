@@ -9,9 +9,9 @@ RUN set -eux; \
 	} >> /usr/local/etc/gemrc
 
 ENV LANG C.UTF-8
-ENV RUBY_MAJOR 2.6
-ENV RUBY_VERSION 2.6.6
-ENV RUBY_DOWNLOAD_SHA256 5db187882b7ac34016cd48d7032e197f07e4968f406b0690e20193b9b424841f
+ENV RUBY_MAJOR 3.1
+ENV RUBY_VERSION 3.1.4
+ENV RUBY_DOWNLOAD_SHA256 1b6d6010e76036c937b9671f4752f065aeca800a6c664f71f6c9a699453af94f
 
 # some of ruby's build scripts are written in ruby
 #   we purge system ruby later to make sure our final image uses what we just built
@@ -19,11 +19,17 @@ RUN set -eux; \
 	\
 	savedAptMark="$(apt-mark showmanual)"; \
 	apt-get update; \
-	apt-get install -y --no-install-recommends \
+	apt-get install -y --no-install-recommends libjemalloc-dev \
 		bison \
 		dpkg-dev \
 		libgdbm-dev \
 		ruby \
+		git \
+		iproute2 \
+		curl \
+		gnupg \
+		gnupg1 \
+		gnupg2 \
 	; \
 	rm -rf /var/lib/apt/lists/*; \
 	\
@@ -47,7 +53,7 @@ RUN set -eux; \
 	\
 	autoconf; \
 	gnuArch="$(dpkg-architecture --query DEB_BUILD_GNU_TYPE)"; \
-	./configure \
+	./configure --with-jemalloc \
 		--build="$gnuArch" \
 		--disable-install-doc \
 		--enable-shared \

@@ -1,18 +1,4 @@
-FROM debian:stretch-slim
-
-RUN set -eux; \
-	apt-get update; \
-	apt-get install -y --no-install-recommends \
-		bzip2 \
-		ca-certificates \
-		libffi-dev \
-		libgmp-dev \
-		libssl-dev \
-		libyaml-dev \
-		procps \
-		zlib1g-dev \
-	; \
-	rm -rf /var/lib/apt/lists/*
+FROM buildpack-deps:buster
 
 # skip installing gem documentation
 RUN set -eux; \
@@ -23,10 +9,10 @@ RUN set -eux; \
 	} >> /usr/local/etc/gemrc
 
 ENV LANG C.UTF-8
-ENV RUBY_MAJOR 2.5
-ENV RUBY_VERSION 2.5.8
-ENV RUBY_DOWNLOAD_SHA256 0391b2ffad3133e274469f9953ebfd0c9f7c186238968cbdeeb0651aa02a4d6d
-ENV RUBYGEMS_VERSION 3.0.3
+ENV RUBY_MAJOR 2.7
+ENV RUBY_VERSION 2.7.8
+ENV RUBY_DOWNLOAD_SHA256 f22f662da504d49ce2080e446e4bea7008cee11d5ec4858fc69000d0e5b1d7fb
+ENV RUBYGEMS_VERSION %%RUBYGEMS%%
 
 # some of ruby's build scripts are written in ruby
 #   we purge system ruby later to make sure our final image uses what we just built
@@ -35,21 +21,16 @@ RUN set -eux; \
 	savedAptMark="$(apt-mark showmanual)"; \
 	apt-get update; \
 	apt-get install -y --no-install-recommends \
-		autoconf \
 		bison \
 		dpkg-dev \
-		gcc \
-		libbz2-dev \
 		libgdbm-dev \
-		libglib2.0-dev \
-		libncurses-dev \
-		libreadline-dev \
-		libxml2-dev \
-		libxslt-dev \
-		make \
 		ruby \
-		wget \
-		xz-utils \
+		git \
+		iproute2 \
+		curl \
+		gnupg \
+		gnupg1 \
+		gnupg2 \
 	; \
 	rm -rf /var/lib/apt/lists/*; \
 	\

@@ -1,4 +1,4 @@
-FROM buildpack-deps:stretch
+FROM buildpack-deps:buster
 
 # skip installing gem documentation
 RUN set -eux; \
@@ -9,10 +9,10 @@ RUN set -eux; \
 	} >> /usr/local/etc/gemrc
 
 ENV LANG C.UTF-8
-ENV RUBY_MAJOR 2.5
-ENV RUBY_VERSION 2.5.8
-ENV RUBY_DOWNLOAD_SHA256 0391b2ffad3133e274469f9953ebfd0c9f7c186238968cbdeeb0651aa02a4d6d
-ENV RUBYGEMS_VERSION 3.0.3
+ENV RUBY_MAJOR 3.0
+ENV RUBY_VERSION 3.0.6
+ENV RUBY_DOWNLOAD_SHA256 b5cbee93e62d85cfb2a408c49fa30a74231ae8409c2b3858e5f5ea254d7ddbd1
+ENV RUBYGEMS_VERSION %%RUBYGEMS%%
 
 # some of ruby's build scripts are written in ruby
 #   we purge system ruby later to make sure our final image uses what we just built
@@ -25,6 +25,12 @@ RUN set -eux; \
 		dpkg-dev \
 		libgdbm-dev \
 		ruby \
+		git \
+		iproute2 \
+		curl \
+		gnupg \
+		gnupg1 \
+		gnupg2 \
 	; \
 	rm -rf /var/lib/apt/lists/*; \
 	\

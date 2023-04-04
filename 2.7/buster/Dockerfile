@@ -10,8 +10,8 @@ RUN set -eux; \
 
 ENV LANG C.UTF-8
 ENV RUBY_MAJOR 2.7
-ENV RUBY_VERSION 2.7.2
-ENV RUBY_DOWNLOAD_SHA256 1b95ab193cc8f5b5e59d2686cb3d5dcf1ddf2a86cb6950e0b4bdaae5040ec0d6
+ENV RUBY_VERSION 2.7.8
+ENV RUBY_DOWNLOAD_SHA256 f22f662da504d49ce2080e446e4bea7008cee11d5ec4858fc69000d0e5b1d7fb
 
 # some of ruby's build scripts are written in ruby
 #   we purge system ruby later to make sure our final image uses what we just built
@@ -19,11 +19,17 @@ RUN set -eux; \
 	\
 	savedAptMark="$(apt-mark showmanual)"; \
 	apt-get update; \
-	apt-get install -y --no-install-recommends \
+	apt-get install -y --no-install-recommends libjemalloc-dev \
 		bison \
 		dpkg-dev \
 		libgdbm-dev \
 		ruby \
+		git \
+		iproute2 \
+		curl \
+		gnupg \
+		gnupg1 \
+		gnupg2 \
 	; \
 	rm -rf /var/lib/apt/lists/*; \
 	\
@@ -47,7 +53,7 @@ RUN set -eux; \
 	\
 	autoconf; \
 	gnuArch="$(dpkg-architecture --query DEB_BUILD_GNU_TYPE)"; \
-	./configure \
+	./configure --with-jemalloc \
 		--build="$gnuArch" \
 		--disable-install-doc \
 		--enable-shared \

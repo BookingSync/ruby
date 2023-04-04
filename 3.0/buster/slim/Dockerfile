@@ -2,7 +2,7 @@ FROM debian:buster-slim
 
 RUN set -eux; \
 	apt-get update; \
-	apt-get install -y --no-install-recommends \
+	apt-get install -y --no-install-recommends libjemalloc-dev \
 		bzip2 \
 		ca-certificates \
 		libffi-dev \
@@ -11,6 +11,12 @@ RUN set -eux; \
 		libyaml-dev \
 		procps \
 		zlib1g-dev \
+		git \
+		iproute2 \
+		curl \
+		gnupg \
+		gnupg1 \
+		gnupg2 \
 	; \
 	rm -rf /var/lib/apt/lists/*
 
@@ -24,8 +30,8 @@ RUN set -eux; \
 
 ENV LANG C.UTF-8
 ENV RUBY_MAJOR 3.0
-ENV RUBY_VERSION 3.0.0
-ENV RUBY_DOWNLOAD_SHA256 68bfaeef027b6ccd0032504a68ae69721a70e97d921ff328c0c8836c798f6cb1
+ENV RUBY_VERSION 3.0.6
+ENV RUBY_DOWNLOAD_SHA256 b5cbee93e62d85cfb2a408c49fa30a74231ae8409c2b3858e5f5ea254d7ddbd1
 
 # some of ruby's build scripts are written in ruby
 #   we purge system ruby later to make sure our final image uses what we just built
@@ -33,7 +39,7 @@ RUN set -eux; \
 	\
 	savedAptMark="$(apt-mark showmanual)"; \
 	apt-get update; \
-	apt-get install -y --no-install-recommends \
+	apt-get install -y --no-install-recommends libjemalloc-dev \
 		autoconf \
 		bison \
 		dpkg-dev \
@@ -50,6 +56,12 @@ RUN set -eux; \
 		ruby \
 		wget \
 		xz-utils \
+		git \
+		iproute2 \
+		curl \
+		gnupg \
+		gnupg1 \
+		gnupg2 \
 	; \
 	rm -rf /var/lib/apt/lists/*; \
 	\
@@ -73,7 +85,7 @@ RUN set -eux; \
 	\
 	autoconf; \
 	gnuArch="$(dpkg-architecture --query DEB_BUILD_GNU_TYPE)"; \
-	./configure \
+	./configure --with-jemalloc \
 		--build="$gnuArch" \
 		--disable-install-doc \
 		--enable-shared \
