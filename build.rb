@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-VERSIONS_TO_BUILD = %w[3.0 3.1 3.2]
+VERSIONS_TO_BUILD = %w[3.4]
 TAG_TO_FIND = /ENV\s+RUBY_VERSION\s+(.+)/
-NAME = "709657315391.dkr.ecr.eu-west-1.amazonaws.com/ruby-jemalloc"
+NAME = "820223782446.dkr.ecr.eu-west-1.amazonaws.com/ruby-jemalloc"
 
 require 'open3'
 
