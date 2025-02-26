@@ -1,7 +1,12 @@
 # frozen_string_literal: true
 
+# Enter version/s to build
 VERSIONS_TO_BUILD = %w[3.4]
 TAG_TO_FIND = /ENV\s+RUBY_VERSION\s+(.+)/
+
+# Enter the ID of AWS ECR registry
+# Main - 709657315391
+# SLR - 820223782446
 NAME = "820223782446.dkr.ecr.eu-west-1.amazonaws.com/ruby-jemalloc"
 
 require 'open3'
