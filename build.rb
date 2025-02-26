@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-VERSIONS_TO_BUILD = %w[2.7 3.0 3.1 3.2]
+VERSIONS_TO_BUILD = %w[3.0 3.1 3.2]
 TAG_TO_FIND = /ENV\s+RUBY_VERSION\s+(.+)/
-NAME = "public.ecr.aws/b0v2c1c3/ruby-jemalloc"
+NAME = "709657315391.dkr.ecr.eu-west-1.amazonaws.com/ruby-jemalloc"
 
 require 'open3'
 
@@ -29,7 +29,7 @@ VERSIONS_TO_BUILD.each do |version|
     final_tag = "#{full_version}-#{base}"
     image_name = "#{NAME}:#{final_tag}"
     Dir.chdir(File.dirname(path)) do
-      run_command("docker build -t #{image_name} .")
+      run_command("docker build --platform linux/amd64 -t #{image_name} .")
       # run_command("docker push #{image_name}")
     end
   end
