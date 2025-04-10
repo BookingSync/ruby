@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Enter version/s to build
-VERSIONS_TO_BUILD = %w[3.4]
+VERSIONS_TO_BUILD = %w[3.3]
 TAG_TO_FIND = /ENV\s+RUBY_VERSION\s+(.+)/
 
 # Enter the ID of AWS ECR registry
