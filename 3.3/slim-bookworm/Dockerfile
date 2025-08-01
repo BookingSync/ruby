@@ -8,7 +8,7 @@ FROM debian:bookworm-slim
 
 RUN set -eux; \
 	apt-get update; \
-	apt-get install -y --no-install-recommends \
+	apt-get install -y --no-install-recommends libjemalloc-dev \
 		ca-certificates \
 		git \
 		iproute2 \
