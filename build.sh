@@ -10,6 +10,7 @@ TAG_TO_FIND="ENV RUBY_VERSION"
 # Main - 709657315391
 # SLR - 820223782446
 NAME="709657315391.dkr.ecr.eu-west-1.amazonaws.com/ruby-jemalloc"
+# NAME="709657315391.dkr.ecr.eu-west-1.amazonaws.com/ruby-jemalloc"
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
