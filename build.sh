@@ -3,7 +3,7 @@
 set -euo pipefail
 
 # Enter version/s to build
-VERSIONS_TO_BUILD=("3.3")
+VERSIONS_TO_BUILD=("3.4")
 TAG_TO_FIND="ENV RUBY_VERSION"
 
 # Enter the ID of AWS ECR registry
