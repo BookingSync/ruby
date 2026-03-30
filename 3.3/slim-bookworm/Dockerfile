@@ -8,8 +8,15 @@ FROM debian:bookworm-slim
 
 RUN set -eux; \
 	apt-get update; \
-	apt-get install -y --no-install-recommends \
+	apt-get install -y --no-install-recommends libjemalloc-dev \
+		procps \
 		ca-certificates \
+		git \
+		iproute2 \
+		curl \
+		gnupg \
+		gnupg1 \
+		gnupg2 \
 	; \
 	rm -rf /var/lib/apt/lists/*
 
