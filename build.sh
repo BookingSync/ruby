@@ -3,14 +3,14 @@
 set -euo pipefail
 
 # Enter version/s to build
-VERSIONS_TO_BUILD=("3.3")
+VERSIONS_TO_BUILD=("3.4")
 TAG_TO_FIND="ENV RUBY_VERSION"
 
 # Enter the ID of AWS ECR registry
 # Main - 709657315391
 # SLR - 820223782446
 NAME="709657315391.dkr.ecr.eu-west-1.amazonaws.com/ruby-jemalloc"
-# NAME="709657315391.dkr.ecr.eu-west-1.amazonaws.com/ruby-jemalloc"
+# NAME="820223782446.dkr.ecr.eu-west-1.amazonaws.com/ruby-jemalloc"
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
